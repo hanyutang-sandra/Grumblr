@@ -1,0 +1,40 @@
+{% extends "grumblr/base.html" %}
+
+{% load static %}
+
+{% block title %}<title>Global Stream</title>{% endblock %}
+
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/global_stream.css' %}">{% endblock %}
+
+{% block content %}
+<nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo">Grumblr</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="follower-stream">Followers</a></li>
+        <li><a href="profile/{{user.id}}">My profile</a></li>
+        <li><a href="logout">Logout</a></li>
+      </ul>
+    </div>
+</nav>
+
+<div class="container blog-post">
+  <div class="s12 m4 l8 post-body">
+    <li style="list-style-type: none" id="post-list"></li>
+  </div>
+</div>
+
+<footer class="page-footer">
+  <div class="container">
+    <div class="row">
+        <h5 class="white-text">Add a post</h5>
+        <div class="add-post">
+          <textarea class="form-control comment-area" type="text" placeholder="Write something" name="post" id="new_post"></textarea>
+          <button id="post-btn">Post</button> 
+      </div>
+  </div>
+</footer>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="{% static 'js/global-stream.js' %}"></script>
+{% endblock %}

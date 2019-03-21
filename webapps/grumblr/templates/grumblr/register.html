@@ -1,0 +1,30 @@
+{% extends "grumblr/base.html" %}
+{% load static %}
+{% block title %}<title>Register</title>{% endblock %}
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">{% endblock %}
+{% block content %}
+  <div class="register-page row">
+    <div class="col s6 offset-s3">
+      <div class="form card">
+        {% for error in form.non_field_errors %}
+        <p> {{error}} </p>
+        {% endfor %}
+        <div class="card-image">
+          <img src="{% static 'site-resources/front.png' %}">
+          <span class="card-title">Sign up</span>
+        </div>
+        <form action="" method="post" class="form-signup">
+          {% for field in form.visible_fields %}
+          <div class="input-field col s12">
+              <input id="{{field.name}}" type="text" name="{{field.name}}" class="form-control">
+              <label for="{{field.name}}">{{field.label}}</label>
+          </div>
+          <p style="color: red">{{field.errors}}</p>
+        {% endfor %}
+        <button>Sign Up</button>
+        {% csrf_token %}
+      </form>
+    </div>
+    </div>
+  </div>
+{% endblock %}

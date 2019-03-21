@@ -1,0 +1,40 @@
+{% extends "grumblr/base.html" %}
+{% load static %}
+{% block title %}<title>Global Stream Page</title>{% endblock %}
+
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/global_stream.css' %}">{% endblock %}
+
+
+{% block content %}
+<nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo">Grumblr</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="follower-stream">Followers</a></li>
+        <li><a href="profile/{{user.id}}">My profile</a></li>
+        <li><a href="logout">Logout</a></li>
+      </ul>
+    </div>
+</nav>
+
+  <div class="container">
+  
+    <div class="col-sm-5">
+      <div class="followers" style="margin-top: 6rem;">
+        <h5>Your follow list</h5>
+        <ul>
+          {% for follower in followers %}
+            <li><a href="profile/{{follower.id}}">{{follower.first_name}} {{follower.last_name}}</a>
+          {% endfor %}
+        </ul>
+      </div>
+    </div>
+
+    <div class="col-sm-7 blog-post" style="margin-top: 2rem; margin-bottom: 3rem;">
+      <li style="list-style-type: none" id="post-list"></li>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="/static/js/follower-stream.js"></script>
+{% endblock %}

@@ -1,0 +1,37 @@
+{% extends "grumblr/base.html" %}
+{% load static %}
+{% block title %}<title>Edit Profile</title>{% endblock %}
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">{% endblock %}
+{% block content %}
+  <div class="register-page row">
+    <div class="col s6 offset-s3">
+      <div class="form card">
+        {% for error in errors %}
+        <p>
+          {{error}}
+        </p>
+        {% endfor %}
+
+        <form enctype="multipart/form-data" action="" method="post" class="form-signup" style="margin-bottom: 3rem;">
+          <div class="card-image">
+            <img src="{% static 'site-resources/front.png' %}">
+            <span class="card-title">Edit Profile</span>
+          </div>
+          {% for field in form.visible_fields %}
+            {% if field.label == 'Profile Picture' %}
+              <span id="edit-upload-picture">{{field}}</span>
+            {% else %}
+              <div class="input-field col s12">
+                  <input id="{{field.name}}" type="text" name="{{field.name}}" class="form-control">
+                  <label for="{{field.name}}">{{field.label}}</label>
+              </div>
+            {% endif %}
+            <p style="color: red">{{field.errors}}</p>
+          {% endfor %}
+          <button>Save</button>
+          {% csrf_token %}
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

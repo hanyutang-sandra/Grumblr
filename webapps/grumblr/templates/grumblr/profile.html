@@ -1,0 +1,72 @@
+{% extends "grumblr/base.html" %}
+{% load static %}
+{% block title %}<title>Profile</title>{% endblock %}
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">{% endblock %}
+
+{% block content %}
+<nav>
+    <div class="nav-wrapper">
+      <a href="/" class="brand-logo">Grumblr</a>
+      <ul id="nav-mobile" class="right hide-on-med-and-down">
+        <li><a href="../follower-stream">Followers</a></li>
+        <li><a href="../profile/{{request_user.id}}">My profile</a></li>
+        <li><a href="../logout">Logout</a></li>
+      </ul>
+    </div>
+</nav>
+
+<div class="container user-profile">
+  <div class="s12 m4 l8 self-info">
+    <div class="card self-intro" id="{{user.id}}">
+        <div class="card-image">
+
+          <img src="{% static 'site-resources/front.png'%}">
+
+          <span class="card-title">{{ user.first_name }} {{ user.last_name }}</span>
+        </div>
+
+        <div class="card-content">
+
+        <h6>About</h6>
+        {% if user_profile.about %}
+          <p>{{ user_profile.about }}</p>
+        {% else %}
+          <p>Doesn't have a bio right now</p>
+        {% endif %}
+
+        <h6>Age</h6>
+        {% if user_profile.age %}
+          <p>{{user_profile.age}}</p>
+        {% else %}
+          <p>It's a secret</p>
+        {% endif %}
+
+        {% if user.id == request_user.id %}
+          <hr>
+          <a href="../edit-profile">Edit profile</a>
+        {% else %}
+        <hr>
+        {% if is_following %}
+            <p>Follow</p>
+            <p><a href="{% url 'unfollow' user.id %}">Unfollow</a></p>
+        {% else %}
+            <p><a href="{% url 'follow' user.id %}">Follow</a></p>
+            <p>Unfollow</p>
+        {% endif %}
+           
+        {% endif %}
+        </div>
+      </div>
+      </div>
+
+    <div class="s12 m4 l8 post-body">
+      <li style="list-style-type: none" id="post-list"></li>
+    </div>
+  </div>
+
+    
+
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="{% static 'js/profile.js' %}"></script>
+
+{% endblock %}

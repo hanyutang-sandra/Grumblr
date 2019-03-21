@@ -1,0 +1,1 @@
+{"id":{{post.id}}, "deleted":{{post.deleted|lower}}, "html":"{{post.html|safe}}"}

@@ -1,0 +1,24 @@
+{% extends "grumblr/base.html" %}
+{% load static %}
+{% block title %}<title>Confirm Email</title>{% endblock %}
+{% block css %}<link rel="stylesheet" type="text/css" href="{% static 'css/register.css' %}">{% endblock %}
+{% block content %}
+  <div class="register-page">
+    <div class="form">
+      {% for error in form.non_field_errors %}
+      <p> {{error}} </p>
+      {% endfor %}
+
+      <form action="" method="post" class="form-signup">
+        <h1>Confirm Your Email Address</h1>
+        {% for field in form.visible_fields %}
+          <label>{{field.label}}</label>
+          <input type="text" class="form-control" name="{{field.name}}">
+          <p style="color: red">{{field.errors}}</p>
+        {% endfor %}
+        <button>Send Mail</button>
+        {% csrf_token %}
+      </form>
+    </div>
+  </div>
+{% endblock %}
