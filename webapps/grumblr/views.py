@@ -209,7 +209,7 @@ def register(request):
 
     send_mail(subject="Verify your email address",
               message=email_body,
-              from_email="hsuehlin+huang@andrew.cmu.edu",
+              from_email="hanyut@andrew.cmu.edu",
               recipient_list=[new_user.email])
 
     return render(request, 'grumblr/confirmation.html', context)
